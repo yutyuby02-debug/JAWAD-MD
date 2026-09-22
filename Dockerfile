@@ -1,15 +1,14 @@
 FROM node:lts-buster
 
-RUN apt-get update && \
-    apt-get install -y \
-    ffmpeg \
-    imagemagick \
-    webp && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ffmpeg imagemagick && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/yutyuby02-debug/JAWAD-MD.git /root/JawadTechX
+
+WORKDIR /root/JawadTechX
 
 COPY package.json .
 
-RUN npm install && npm install -g qrcode-terminal pm2
+RUN npm install --legacy-peer-deps
 
 COPY . .
 
